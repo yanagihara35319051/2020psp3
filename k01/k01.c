@@ -80,11 +80,12 @@ int BinarySearch(int key, City arrayCity[], int left, int right)
 {
     //  ここを実装する
     int i;
+    int j;
     left = 0;
     right = MAX_CITY;
     i = (right+left)/2;
-    
-    while(1){
+    j =  0;
+    while(left <= right){
        if(key == arrayCity[i].id){
            return i;
        }
@@ -96,10 +97,7 @@ int BinarySearch(int key, City arrayCity[], int left, int right)
        }
 
        i = (right+left)/2;
-
-       if(i < 0 || i > MAX_CITY){
-           return -1;
-       }
+      
     }
 
 }
