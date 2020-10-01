@@ -65,14 +65,42 @@ int LoadData(City arrayCity[])
 int LinearSearch(int key, City arrayCity[], int size)
 {
     //  ここを実装する
+    int i;
+    for(i=0; i<size; i++){
+       if(key == arrayCity[i].id){
+          return i;
+       }
+    }
 
+    return -1; 
 
 }
 
 int BinarySearch(int key, City arrayCity[], int left, int right)
 {
     //  ここを実装する
+    int i;
+    left = 0;
+    right = MAX_CITY;
+    i = (right+left)/2;
+    
+    while(1){
+       if(key == arrayCity[i].id){
+           return i;
+       }
+       if(key < arrayCity[i].id){
+           right = i-1;
+       }
+       if(key > arrayCity[i].id){
+           left = i + 1;
+       }
 
+       i = (right+left)/2;
+
+       if(i < 0 || i > MAX_CITY){
+           return -1;
+       }
+    }
 
 }
 
