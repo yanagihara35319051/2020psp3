@@ -81,7 +81,7 @@ int BinarySearch(int key, City arrayCity[], int left, int right)
     //  ここを実装する
     int mid;
     left = 0;
-    right = MAX_CITY;
+    right = MAX_CITY -1;
     
     while(left <= right){
         mid = (right+left)/2;
