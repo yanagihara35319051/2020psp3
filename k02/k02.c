@@ -19,8 +19,8 @@ typedef struct node_data {
 } Node;
 
 #define DEBUG
-//#define CHALLENGE1
-//#define CHALLENGE2
+#define CHALLENGE1
+#define CHALLENGE2
 
 #define SUCCESS 1
 #define ERROR   0
@@ -76,13 +76,38 @@ void PrintList(Node* pTop)
 Node* InsertNewNode(City newCity, Node* pNext)
 {
     //  ここを実装する
+    Node* pNode = malloc(sizeof(Node));
+    pNode->city = newCity;
+    pNode->pNext = pNext;
 
+    return pNode;
+    
 }
 
 #ifdef CHALLENGE1
 int DeleteNodeAt(Node** ppNode, int cn)
 {
     //  チャレンジ問題1
+     Node* pNode;
+     while(cn>0 && ppNode != NULL){
+         ppNode = &((*ppNode)->pNext);
+         cn--;
+     }
+
+     if(*ppNode != NULL){
+         pNode = (*ppNode)->pNext;
+         free(ppNode);
+         *ppNode = pNode;
+         return SUCCESS;
+     } else{
+         return ERROR;
+     }
+
+
+
+
+
+
     //  ここを実装する
 
 }
@@ -92,6 +117,21 @@ int DeleteNodeAt(Node** ppNode, int cn)
 int SearchCityByName(Node* pList, char* cityName, City* pCity)
 {
     //  チャレンジ問題2
+    Node* pNode;
+    pNode = pList;
+    int result = -1;
+    int i = 0;
+    
+    while(pNode != NULL){
+        if(strcmp(pNode->city.name,cityName) == 0){
+           *pCity = pNode->city;
+           result = i;
+           break;
+        }
+        pNode = pNode->pNext;
+        i++;
+    }
+    return result;
     //  ここを実装する
 
 }
@@ -100,7 +140,20 @@ int SearchCityByName(Node* pList, char* cityName, City* pCity)
 int SearchCityByID(Node* pList, int ID, City* pCity)
 {
     // ここを実装する
-
+    Node* pNode;
+    pNode = pList;
+    int result= -1;
+    int i = 0;
+    while(pNode!=NULL){
+       if(pNode->city.id == ID){
+           *pCity = pNode->city;
+           result = i;
+           break;
+    } 
+    pNode = pNode->pNext;
+    i++;
+    }
+    return result;
 }
 
 int main(void)
@@ -109,7 +162,7 @@ int main(void)
     FILE* fp;
     int key;
 
-    fp = fopen("nagasaki.csv","r");
+    fp = fopen("nagasaki2.csv","r");
     if(fp==NULL){
         fputs("File open error\n",stderr);
         exit(EXIT_FAILURE);
@@ -147,7 +200,7 @@ int main(void)
         printf("sorry, the city was not found\n");
     }
 
-#ifdef CHALLENGE1
+#ifdef CHALLENGE2
     //  市町村名で特定の市町村を探す
     char name[32];
     printf("City Name?");
@@ -161,7 +214,7 @@ int main(void)
     }
 #endif
 
-#ifdef CHALLENGE2
+#ifdef CHALLENGE1
     // 特定の場所のノードを削除する
     // cnは直前の検索結果
     DeleteNodeAt(&pTop, cn);

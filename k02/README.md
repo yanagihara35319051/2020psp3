@@ -69,13 +69,102 @@ typedef struct {
     - return値: IDが合致した配列データのindex。IDが一致するデータがない場合は-1。
 
 ## ソースコードの説明
-
-
-
+関数　InsertNewNode
+79:新しく挿入する要素の領域を確保
+80:新しく格納するデータを新しい要素に格納
+81:pNode->pNextにpNextを格納
+関数　SearchCityID
+144:pNodeにリストの先頭アドレスを代入
+147：リストの最後まで検索するまでループ
+148:IDが要素と一致したら、pCityにIDが一致したリストのデータを代入し、resultにインデックスを格納しループを抜ける
+153：pNodeを次のリストのアドレスに変更
+関数 DeleteNodeAt
+92～95：削除したい要素まで先頭からアドレスをたどって移動する
+97～100：削除したい要素の次の要素をpNodeに記憶させておき、削除したい要素の領域を解放。その後ppNodeにpNodeを代入する。
+関数SearchCityByName
+121:pNodeにリストの先頭アドレスを代入
+125:リストの最後まで検索するまでループ
+125～130:市町村名を比較し、一致したらpCityに一致した要素を格納しresultにインデックスを代入しループを抜ける
+131：pNodeを次のリストのアドレスに変更
 ## 出力結果
 
 ```
-
+PS C:\Users\bb35319051\Desktop\2020psp3\k02> ./k02
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
+===== Start Printing =====
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+print list. items = 21
+===== Print End =====
+City ID?42201
+the city was found at 20
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+City Name?Sasebo
+the city was found at 19
+42202, NagasakiKen, Sasebo, 255439, 120198, 135241
+===== Start Printing =====
+42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
+42391, NagasakiKen, Sasa, 13626, 6426, 7200
+42383, NagasakiKen, Ojika, 2560, 1172, 1388
+42323, NagasakiKen, Hasami, 14891, 7079, 7812
+42322, NagasakiKen, Kawatana, 14067, 6656, 7411
+42321, NagasakiKen, HigashiSonogi, 8298, 3886, 4412
+42308, NagasakiKen, Togitsu, 29804, 14326, 15478
+42307, NagasakiKen, Nagayo, 42548, 20090, 22458
+42214, NagasakiKen, MinamiShimabara, 46535, 21574, 24961
+42213, NagasakiKen, Unzen, 44115, 20847, 23268
+42212, NagasakiKen, Saikai, 28691, 14032, 14659
+42211, NagasakiKen, Goto, 37327, 17339, 19988
+42210, NagasakiKen, Iki, 27103, 12860, 14243
+42209, NagasakiKen, Tsushima, 31457, 15361, 16096
+42208, NagasakiKen, Matsuura, 23309, 11164, 12145
+42207, NagasakiKen, Hirado, 31920, 14874, 17046
+42205, NagasakiKen, Omura, 92757, 43938, 48819
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
+42203, NagasakiKen, Shimabara, 45436, 20999, 24437
+42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
+print list. items = 20
+===== Print End =====
+free list. items = 20
 ```
 
 ## 修正履歴
