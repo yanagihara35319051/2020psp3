@@ -176,4 +176,4 @@ free list. items = 20
 ```
 
 ## 修正履歴
-
+92行目のppnodeを(*ppnode)->pNextに修正

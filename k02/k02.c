@@ -89,14 +89,14 @@ int DeleteNodeAt(Node** ppNode, int cn)
 {
     //  チャレンジ問題1
      Node* pNode;
-     while(cn>0 && ppNode != NULL){
+     while(cn>0 && (*ppNode)-> pNext != NULL){
          ppNode = &((*ppNode)->pNext);
          cn--;
      }
 
      if(*ppNode != NULL){
          pNode = (*ppNode)->pNext;
-         free(ppNode);
+         free(*ppNode);
          *ppNode = pNode;
          return SUCCESS;
      } else{
