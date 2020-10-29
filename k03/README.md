@@ -35,12 +35,37 @@
 なし
 
 ## ソースコードの説明
+力ずく法
+13,14:検索対象の文字を保持する変数pos,start,それぞれの文字列の長さを格納するtext_len,key_lenを宣言
+15～20：それぞれの配列の長さを格納
+24～26：文字を検索する。keyの1文字目から比較し、一致したら次の文字を比較する。この動作をくりかえす。
+27～29；keyの最後の文字まで一致したら、ヒットした配列のアドレスを返値として返す。
+30：最初に比較する位置を1つずらす
 
-
+BM法
+39、40：検索対象の文字を保持する変数index,key_index,それぞれの文字列の長さを格納するtext_len,key_lenを宣言
+41～42：一文字一文字のずらし量を格納した配列table、検索開始位置を保持するbefore_indexを宣言
+44～55：それぞれの配列の長さを格納
+57～58：インデックスに検索開始位置、before_indexにも同じ値を代入
+60；無限ループ
+63～65：indexが文字列の中から抜けていたらNULLを返す
+67～73；文字をkeyの末尾から比較し、すべて一致したらヒットした文字列のアドレスを返す
+75：indexをtableにしたがってずらす
+76～78：もし前回よりも比較開始位置が前か同じになったら、比較開始位置を前の一つ前にする
 
 ## 出力結果
 
 ```
+検索文字列："wind"
+PS C:\Users\bb35319051\Desktop\2020psp3\k03> ./k03
+Force Search. Find keyword at:wind in my hair.
+BM Search. Find keyword at:wind in my hair.
+
+検索文字列:"hoge"
+PS C:\Users\bb35319051\Desktop\2020psp3\k03> ./k03
+Force Search. Find keyword at:(null)
+BM Search. Find keyword at:(null)
+
 
 ```
 
