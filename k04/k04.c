@@ -162,6 +162,7 @@ void ParticalHeap(City arrayCity[],int size,int index){
         right_node = left_node;
     }
 
+
     if((arrayCity[index].meat < arrayCity[left_node].meat && arrayCity[index].meat < arrayCity[right_node].meat) || index > last_node){
         return;
     }
