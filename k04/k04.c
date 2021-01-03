@@ -112,6 +112,7 @@ void QuickSort(City arrayCity[], int left, int right)
     if(left == right){
         return;
     }
+    
     else{
         while(i <= j){
             if(pivot < arrayCity[i].seafood){
