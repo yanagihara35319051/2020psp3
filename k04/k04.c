@@ -303,10 +303,7 @@ int main(void)
     QuickSort(arrayCity, 0, MAX_CITY - 1);
     PrintArray(arrayCity, MAX_CITY);
     printf("\n");
-    for(cn = 0;cn < MAX_CITY;cn++){
-        printf("%d\n",arrayCity[cn].seafood);
-    }
-
+    
     printf("===== Sorted by liquor =====\n");
     MergeSort(arrayCity, 0, MAX_CITY - 1);
     PrintArray(arrayCity, MAX_CITY);
