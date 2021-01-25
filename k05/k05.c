@@ -106,6 +106,47 @@ int StackIsEmpty(void)
 void DepthFirstSearch(int size, int matrix[size][size], int start)
 {
     //  ここを実装する
+    StackInit();
+    int visited[size],i,check = 0;
+    int index = start;
+    char route[1000] = " ";
+    char str[] = " -> ";
+
+    for ( i = 0; i < size; i++){
+         visited[i] = 0;
+    }
+    StackPush(start);
+
+    while(StackIsEmpty() == FALSE){
+        index = StackPop();
+        if(visited[index] == 0){
+            strcat(route,str);
+            visited[index] = 1;
+            strcat(route,ArrayStation[index].kanji);
+            for(i = 0;i < size;i++){
+                if(matrix[index][i] != 0){
+                    StackPush(i);
+                }
+            }
+        }
+    }
+    for(i = 0;i < size;i++){
+       if(visited[i] == 1){
+           check = check+1;
+       }
+    }
+
+    if(check == size){
+        printf("possible arrive  DepthFirstSearch\n");
+    }
+    else{
+        printf("impossible arrive  DepthFirstSearch\n");
+    }
+
+    printf("route : %s\n",route);
+    printf("\n");
+
+    return;
 
 }
 
@@ -172,7 +213,48 @@ int QueueIsEmpty()
 void BreadthFirstSearch(int size, int matrix[size][size], int start)
 {
     //  ここを実装する
+    InitQueue();
+    int visited[size],i,check = 0;
+    int index = start;
+    char route[1000] = " ";
+    char str[] = " -> ";
 
+    for(i = 0;i < size; i++){
+        visited[i] =  0;
+    }
+    EnQueue(start);
+
+    while(QueueIsEmpty() == FALSE){
+        index = DeQueue();
+        if(visited[index] == 0){
+            strcat(route,str);
+            visited[index] = 1;
+            strcat(route,ArrayStation[index].kanji);
+            for(i = 0;i < size;i++){
+                if(matrix[index][i] != 0){
+                    EnQueue(i);
+                }
+            }
+        }
+    }
+
+    for(i = 0;i < size;i++){
+       if(visited[i] == 1){
+           check = check+1;
+       }
+    }
+
+    if(check == size){
+        printf("possible arrive  BreadthFirstSearch\n");
+    }
+    else{
+        printf("impossible arrive  BreadthFirstSearch\n");
+    }
+
+    printf("route : %s\n",route);
+    printf("\n");
+
+    return;
 }
 
 
@@ -181,7 +263,63 @@ void BreadthFirstSearch(int size, int matrix[size][size], int start)
 int SearchGraphByDijkstra(int start, int goal, int size, int matrix[size][size])
 {
     //  ここを実装する
+    NodeInfo arraynodeinfo[size];
+    int i,inf = 9999,index = start,root_sum;
+    char route[1000] =" ";
+    char str[] = " <- ";
 
+    for(i = 0; i < size; i++){
+        arraynodeinfo[i].fix = 0;
+        if(i == start){
+            arraynodeinfo[i].cost = 0;
+        }
+        else{
+            arraynodeinfo[i].cost = inf;
+        }
+    }
+    arraynodeinfo[start].from = -1;
+
+    while(arraynodeinfo[goal].fix == 0){
+        for(i = 0; i < size ;i++){
+            if(arraynodeinfo[i].fix == 0){
+               if(arraynodeinfo[index].cost > arraynodeinfo[i].cost){
+                  index = i;
+               }
+            } 
+        }
+
+        arraynodeinfo[index].fix = 1;
+
+        for(i = 0; i < size; i++){
+            if(matrix[index][i] != 0){
+                root_sum = arraynodeinfo[index].cost + matrix[index][i];
+                if(arraynodeinfo[i].cost > root_sum){
+                    arraynodeinfo[i].cost = root_sum;
+                    arraynodeinfo[i].from = index;
+                }
+            }
+        }
+
+        for(i = 0; i < size; i++){
+            if(arraynodeinfo[i].fix == 0){
+                if(arraynodeinfo[i].cost != inf){
+                    index = i;
+                    break;
+                }
+            }
+        }
+    }
+    index = goal;
+    while (arraynodeinfo[index].from != -1){
+        strcat(route,ArrayStation[index].kanji);
+        strcat(route,str);
+        index = arraynodeinfo[index].from;
+
+    }
+
+    printf("shortest root : %s\n",route);
+
+    return arraynodeinfo[goal].cost;
 }
 
 
@@ -189,7 +327,6 @@ int SearchGraphByDijkstra(int start, int goal, int size, int matrix[size][size])
 int main(void)
 {
     int cost;
-
     DepthFirstSearch(MAX_STATIONS, AdjacencyMatrix, 0);
     BreadthFirstSearch(MAX_STATIONS, AdjacencyMatrix, 0);
 
